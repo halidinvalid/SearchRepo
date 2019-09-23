@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Github Accounts</string>
     <string name="error_message_unknowon_error">UserName not found!</string>
+    <string name="text_stars">Stars : </string>
+    <string name="text_issues">Open Issues : </string>
 
 </resources>

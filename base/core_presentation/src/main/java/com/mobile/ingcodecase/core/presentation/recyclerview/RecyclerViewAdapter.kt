@@ -1,6 +1,7 @@
 package com.mobile.ingcodecase.core.presentation.recyclerview
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,10 @@ class RecyclerViewAdapter constructor(
     private val viewBinderFactoryMap: Map<Int, ViewHolderBinder>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), DiffAdapter {
 
+
+    var itemClickListener: ((view: View, item: DisplayItem) -> Unit)? = null
+    var itemLongClickListener: ((view: View, item: DisplayItem) -> Boolean)? = null
+
     override fun clearRecyclerView() {
         items.clear()
         notifyDataSetChanged()
@@ -25,6 +30,9 @@ class RecyclerViewAdapter constructor(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         viewBinderFactoryMap[items[position].type()]?.bind(holder, items[position])
+        (holder as ViewHolder<*>).itemClickListener = itemClickListener
+        holder.itemLongClickListener = itemLongClickListener
+
     }
 
     override fun getItemCount() = items.size

@@ -6,7 +6,7 @@ import io.reactivex.functions.Function
 
 class SearchRepoViewEntityMapper : Function<SearchRepoResponse.Repo, DisplayItem> {
     override fun apply(t: SearchRepoResponse.Repo): DisplayItem {
-        return SearchRepoViewEntity(t.name)
+        return SearchRepoViewEntity(t.name, t.starCount, t.openIssuesCount, t.owner)
     }
 
 }

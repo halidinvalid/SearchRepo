@@ -7,11 +7,13 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mobile.ingcodecase.core.error.Error
 import com.mobile.ingcodecase.core.presentation.BaseActivity
 import com.mobile.ingcodecase.core.presentation.Constants
 import com.mobile.ingcodecase.core.presentation.R
+import com.mobile.ingcodecase.core.presentation.navigation.UiNavigation
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
@@ -24,6 +26,9 @@ abstract class BaseFragment : Fragment(), BaseView {
 
     @StringRes
     open val titleRes = Constants.NO_RES
+
+    open val uiNavigation = UiNavigation.BACK
+
 
     override fun onAttach(context: Context?) {
         if (activity is HasSupportFragmentInjector) {
@@ -57,12 +62,28 @@ abstract class BaseFragment : Fragment(), BaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initNavigation(uiNavigation)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (titleRes != Constants.NO_RES) {
             setActivityTitle(getString(titleRes))
+        }
+    }
+
+    fun initNavigation(uiNavigation: UiNavigation) {
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        when (uiNavigation) {
+            UiNavigation.BACK -> {
+                actionBar?.setDisplayHomeAsUpEnabled(true)
+                actionBar?.setHomeButtonEnabled(true)
+            }
+            UiNavigation.ROOT -> {
+                actionBar?.setDisplayHomeAsUpEnabled(false)
+                actionBar?.setHomeButtonEnabled(false)
+            }
         }
     }
 
@@ -80,6 +101,7 @@ abstract class BaseFragment : Fragment(), BaseView {
             (activity as BaseActivity).setScreenTitle(title)
         }
     }
+
 
     fun getApplication() = activity?.application
 

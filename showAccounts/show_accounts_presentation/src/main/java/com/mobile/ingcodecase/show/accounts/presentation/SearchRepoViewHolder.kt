@@ -20,7 +20,11 @@ class SearchRepoViewHolder private constructor(itemView: View) :
 
     override fun bind(item: SearchRepoViewEntity) {
 
-            textviewRepoName.text = item.name
+        textviewRepoName.text = item.name
+
+        textviewRepoName.setOnClickListener {
+            itemClickListener?.invoke(it, item)
+        }
     }
 
     internal class SearchRepoViewHolderFactory @Inject constructor() : ViewHolderFactory {

@@ -42,5 +42,7 @@ All features is implemented as 3 modules which are seperated by their scope.
 
 
 ## Screenshots:
-<img src=""
+<img src="https://raw.githubusercontent.com/halidinvalid/SearchRepo/dev/art/Screenshot_1569247002.png"
+height="384" width="210"></br>
+<img src="https://raw.githubusercontent.com/halidinvalid/SearchRepo/dev/art/Screenshot_1569247008.png"
 height="384" width="210">
