@@ -1,0 +1,33 @@
+apply plugin: Plugins.androidApplication
+apply from: "$rootDir/common.gradle"
+
+android {
+    flavorDimensions Dimensions.default
+    productFlavors {
+        prod {
+            // empty
+        }
+
+        dev {
+            applicationIdSuffix Dev.applicationIdSuffix
+            versionNameSuffix Dev.versionNameSuffix
+        }
+    }
+}
+
+dependencies {
+
+    // Core
+    implementation project(Modules.core)
+    implementation project(Modules.coreData)
+    implementation project(Modules.coreDomain)
+    implementation project(Modules.corePresentation)
+
+    // Tv Shows
+    implementation project(Modules.showAccountsPresentation)
+    implementation project(Modules.showAccountsDomain)
+    implementation project(Modules.showAccountsData)
+
+    // Support Libraries
+    implementation SupportLibraries.appCompat
+}

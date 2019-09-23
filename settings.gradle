@@ -1,0 +1,3 @@
+include Modules.app
+include Modules.core, Modules.corePresentation, Modules.coreData, Modules.coreDomain
+include Modules.showAccountsPresentation, Modules.showAccountsData, Modules.showAccountsDomain
