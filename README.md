@@ -1,4 +1,4 @@
-#search repo
+# search repo
 An example approach for Android Application modularization and Reactive Clean architecture.
 
 ## Modularization:
