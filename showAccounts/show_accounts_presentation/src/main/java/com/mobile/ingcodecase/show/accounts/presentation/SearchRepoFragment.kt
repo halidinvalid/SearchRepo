@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.mobile.ingcodecase.core.model.DataHolder
 import com.mobile.ingcodecase.core.presentation.base.BaseFragment
 import com.mobile.ingcodecase.core.presentation.extensions.setup
+import com.mobile.ingcodecase.core.presentation.recyclerview.DisplayItem
 import com.mobile.ingcodecase.core.presentation.recyclerview.RecyclerViewAdapter
-import com.mobile.ingcodecase.core.presentation.viewmodel.VmFactory
 import kotlinx.android.synthetic.main.fragment_search_repo.*
 import javax.inject.Inject
 
@@ -41,14 +41,21 @@ class SearchRepoFragment : BaseFragment() {
             setup(context = activity!!, adapter = searchRepoAdapter)
 
         }
-
+        searchRepoAdapter.itemClickListener = this.itemClickListener
         buttonSubmit.setOnClickListener {
-
             if (editTextUserName.text.toString() == "")
                 Toast.makeText(activity, "Username must not be empty", Toast.LENGTH_LONG).show()
             else
                 viewModelSearchRepo.fetchSearchRepo(editTextUserName.text.toString())
         }
+    }
+
+    private val itemClickListener = { view: View, item: DisplayItem ->
+        if (item is SearchRepoViewEntity) {
+            Toast.makeText(context, item.name, Toast.LENGTH_LONG).show()
+
+        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -57,7 +64,8 @@ class SearchRepoFragment : BaseFragment() {
             when (it) {
                 is DataHolder.Success -> {
                     searchRepoAdapter.clearRecyclerView()
-                    searchRepoAdapter.addItems(it.data)}
+                    searchRepoAdapter.addItems(it.data)
+                }
                 is DataHolder.Fail -> onError(it.e)
                 is DataHolder.Loading -> Log.e("loading", "search repo")
             }
