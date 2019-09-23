@@ -52,7 +52,16 @@ class SearchRepoFragment : BaseFragment() {
 
     private val itemClickListener = { view: View, item: DisplayItem ->
         if (item is SearchRepoViewEntity) {
-            Toast.makeText(context, item.name, Toast.LENGTH_LONG).show()
+            activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(
+                R.id.framelayout_main,
+                SearchRepoDetailFragment.newInstance(
+                    item.owner.profileImagePath,
+                    item.starCount,
+                    item.name,
+                    item.owner.loginOwner,
+                    item.openIssuesCount
+                )
+            )?.commit()
 
         }
 

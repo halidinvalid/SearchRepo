@@ -1,17 +1,15 @@
-package com.mobile.ingcodecase.ui
+package com.mobile.ingcodecase.show.accounts.presentation
 
 import android.os.Bundle
-import com.mobile.ingcodecase.R
 import com.mobile.ingcodecase.core.presentation.BaseActivity
 import com.mobile.ingcodecase.core.presentation.extensions.transact
 import com.mobile.ingcodecase.core.presentation.navigation.UiNavigation
-import com.mobile.ingcodecase.show.accounts.presentation.SearchRepoFragment
 
-class MainActivity : BaseActivity() {
+class SearchRepoActivity : BaseActivity() {
 
     override val uiNavigation = UiNavigation.ROOT
 
-    override fun getLayoutRes() = R.layout.activity_main
+    override fun getLayoutRes() = R.layout.activity_search_repo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
