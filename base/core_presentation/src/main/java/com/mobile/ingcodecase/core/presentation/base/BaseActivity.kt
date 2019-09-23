@@ -1,6 +1,7 @@
 package com.mobile.ingcodecase.core.presentation
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
@@ -51,6 +52,21 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     fun setScreenTitle(title: String?) {
         supportActionBar?.title = title
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     fun initNavigation(uiNavigation: UiNavigation) {

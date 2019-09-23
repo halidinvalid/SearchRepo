@@ -3,6 +3,7 @@ package com.mobile.ingcodecase.show.accounts.presentation
 import android.os.Bundle
 import com.mobile.ingcodecase.core.presentation.base.BaseFragment
 import com.mobile.ingcodecase.core.presentation.extensions.loadImage
+import com.mobile.ingcodecase.core.presentation.navigation.UiNavigation
 import kotlinx.android.synthetic.main.fragment_search_repo_details.*
 
 class SearchRepoDetailFragment : BaseFragment() {
@@ -15,6 +16,7 @@ class SearchRepoDetailFragment : BaseFragment() {
 
     override fun getLayoutRes() = R.layout.fragment_search_repo_details
 
+    override val uiNavigation = UiNavigation.BACK
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +26,11 @@ class SearchRepoDetailFragment : BaseFragment() {
         owner = arguments?.getString(BUNDLE_OWNER).toString()
         openIssues = arguments?.getInt(BUNDLE_OPEN_ISSUES)!!
 
-
     }
 
 
     override fun initView() {
         super.initView()
-
-
         if (imagePath.equals(""))
             imagePath = "https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png"
 

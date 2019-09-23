@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.mobile.ingcodecase.core.model.DataHolder
 import com.mobile.ingcodecase.core.presentation.base.BaseFragment
 import com.mobile.ingcodecase.core.presentation.extensions.setup
+import com.mobile.ingcodecase.core.presentation.navigation.UiNavigation
 import com.mobile.ingcodecase.core.presentation.recyclerview.DisplayItem
 import com.mobile.ingcodecase.core.presentation.recyclerview.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_search_repo.*
@@ -24,6 +25,8 @@ class SearchRepoFragment : BaseFragment() {
     protected lateinit var searchRepoAdapter: RecyclerViewAdapter
 
     protected lateinit var viewModelSearchRepo: SearchRepoViewModel
+
+    override val uiNavigation = UiNavigation.ROOT
 
 
     override fun getLayoutRes() = R.layout.fragment_search_repo
@@ -48,6 +51,7 @@ class SearchRepoFragment : BaseFragment() {
             else
                 viewModelSearchRepo.fetchSearchRepo(editTextUserName.text.toString())
         }
+        setActivityTitle(getString(R.string.app_name))
     }
 
     private val itemClickListener = { view: View, item: DisplayItem ->
